@@ -1,0 +1,89 @@
+---
+import Title from './atoms/Title.astro';
+import { getPortafolioData } from "../components/data/portfolioData.js";
+import Card from './card-portfolio/CardPortfolio.astro';
+---
+
+<section
+  id="portafolio"
+  class="flex flex-col items-center w-full h-full md:max-w-full justify-center flex-wrap px-4"
+>
+  <h1 class="clips-padding"></h1>
+  <Title contenido="Clips" margin="2rem"/>
+  <p class="clips-description">Watch some of our favorite moments from TNCRP!</p>
+
+  <div class="clips-grid">
+    <!-- Video Clip 1 -->
+    <div class="clip-box">
+      <iframe
+        class="clip-video"
+        src="https://www.youtube.com/embed/77Q2p5qJ9jw?start=420"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <!-- Video Clip 2 -->
+    <div class="clip-box">
+      <iframe
+        class="clip-video"
+        src="https://www.youtube.com/embed/X0sYJaSh-Uo"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <!-- Video Clip 3 -->
+    <div class="clip-box">
+      <iframe
+        class="clip-video"
+        src="https://www.youtube.com/embed/jGmC_t-FXhQ?start=155"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+      
+    </div>
+    <h1 class="clips-padding"></h1>
+  </div>
+</section>
+
+<style>
+  .clips-padding {
+    padding-bottom: 25rem; /* Reduced padding for better spacing */
+  }
+
+  .clips-description {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .clips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ensure videos align side by side */
+    gap: 1.5rem; /* Space between videos */
+    width: 100%;
+    max-width: 1200px; /* Limit maximum width of grid */
+    margin: 0 auto; /* Center the grid container */
+  }
+
+  .clip-box {
+    aspect-ratio: 16 / 9; /* Maintain consistent video aspect ratio */
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Hide any overflow */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Subtle shadow for a polished look */
+  }
+
+  .clip-video {
+    width: 100%; /* Make the iframe fully responsive */
+    height: 100%;
+    border: none; /* Remove any borders */
+  }
+</style>

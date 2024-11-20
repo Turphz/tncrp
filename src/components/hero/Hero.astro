@@ -1,0 +1,191 @@
+---
+import './hero.css';
+import Boton from '../atoms/Boton.astro';
+---
+
+<section class="hero">
+	<div class="hero__container">
+	  <div class="text__content">
+		<h1 class="hero__title color__gradiente">GRAND THEFT AUTO V</h1>
+		<h1 class="hero__text2">Roleplay Server</h1>
+		<p class="hero__text">
+		  Join our community and come play on our server for an amazing roleplay experience! Our server offers a built-in voice chat system, advanced scripts and features, and an active, friendly and dedicated server administration.
+		</p>
+		<div class="server-info">
+		  <!-- Players Online -->
+		  <div class="info">
+			<div class="players-online">
+			  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+				<path d="M12 5.9c1.16 0 2.1.94 2.1 2.1s-.94 2.1-2.1 2.1S9.9 9.16 9.9 8s.94-2.1 2.1-2.1m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"></path>
+			  </svg>
+			  <div class="box">
+				<div class="top-row">
+				  <span class="label blue">Online:</span>
+				  <div class="numbers">
+					<span class="current" id="current-players">Loading...</span>
+					<span class="total">/ 48</span>
+				  </div>
+				</div>
+				<div class="progress">
+				  <div class="progress-bar" id="progress-bar" style="width: 0%;"></div>
+				</div>
+			  </div>
+			</div>
+		  </div>
+  
+		  <div class="info-divider"></div>
+  
+		  <!-- Server IP -->
+		  <div class="info ip">
+			<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+			  <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"></path>
+			</svg>
+			<div class="box">
+			  <span class="label">Server IP:</span>
+			  <a class="address">TNCRP.COM:22005</a>
+			</div>
+		  </div>
+		</div>
+		<Boton href="https://discord.gg/9nk9eqUW" texto="Join Community" />
+	  </div>
+	  <img
+		class="hero__img"
+		src="https://eclipse-rp.net/images/pair.png"
+		alt="TNCRP"
+	  />
+	</div>
+  </section>
+  
+  <script>
+	async function fetchPlayerCount() {
+  const url = "https://servers.fivem.net/servers/detail/r9l7aj";
+
+  try {
+    const response = await fetch(url);
+    const text = await response.text();
+
+    // Parse the number of players from the page
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, "text/html");
+
+    // Use the correct selector for the span containing "1 / 48"
+    const playerCountElement = doc.querySelector("span");
+    const playerCountText = playerCountElement ? playerCountElement.textContent.trim() : "0 / 0";
+
+    // Extract just the current player count (before the "/")
+    const [currentPlayers] = playerCountText.split(" / ");
+
+    // Update the player count and progress bar
+    document.getElementById("current-players").textContent = currentPlayers;
+    const progress = Math.min((parseInt(currentPlayers) / 48) * 100, 100);
+    document.getElementById("progress-bar").style.width = `${progress}%`;
+  } catch (error) {
+    console.error("Error fetching player count:", error);
+    document.getElementById("current-players").textContent = "Error";
+  }
+}
+
+// Fetch every 10 seconds
+setInterval(fetchPlayerCount, 10000);
+
+// Fetch immediately on page load
+fetchPlayerCount();
+
+  </script>
+<style>
+	.hero .server-info {
+		margin-top: 1rem;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 1rem;
+		padding: 0.5rem 1rem;
+		background: rgba(255, 255, 255, 0.1);
+		position: relative;
+		box-shadow: 0 0 10px rgba(128, 0, 128, 0.6);
+		width: fit-content; /* Ensure the border fits snugly */
+	}
+
+	.hero .info .icon {
+		width: 2.5rem;
+		height: 2.5rem;
+		margin-right: 0.5rem;
+		fill: #fff;
+	}
+
+	.hero .info .box {
+		display: flex;
+		flex-direction: column;
+		color: #fff;
+	}
+
+	.hero .info .label {
+		font-weight: bold;
+		color: #fff;
+		font-size: 1.4rem; /* Increased size */
+	}
+
+	.hero .progress {
+		margin-top: 0.5rem;
+		background: rgba(255, 255, 255, 0.2);
+		height: 0.7rem; /* Slightly taller */
+		overflow: hidden;
+		position: relative;
+		width: 100px; /* Adjusted width */
+	}
+
+	.hero .progress-bar {
+		background: #00ff00;
+		height: 100%;
+	}
+
+	.hero .ip .address {
+		color: #00ffff;
+		text-decoration: none;
+		font-weight: bold;
+		cursor: pointer;
+		font-size: 1.4rem; /* Increased size */
+	}
+</style>
+<style>
+	.hero .server-info {
+		margin-top: 1rem;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 1rem;
+		padding: 0.5rem 1rem;
+		background: rgba(255, 255, 255, 0.1);
+		position: relative;
+		box-shadow: 0 0 10px rgba(128, 0, 128, 0.6);
+		width: fit-content; /* Ensure the border fits snugly */
+	}
+
+	/* Corner lines */
+	.hero .server-info::before,
+	.hero .server-info::after {
+		content: '';
+		position: absolute;
+		width: 10%; /* Horizontal line length */
+		height: 30%; /* Vertical line length */
+		background: transparent;
+		border: 2px solid rgba(128, 0, 128, 0.6); /* Purple border color */
+		border-radius: 3px; /* Add rounded corners */
+	}
+
+	/* Top-left corner */
+	.hero .server-info::before {
+		top: 0;
+		left: 0;
+		border-right: none; /* Remove the right side of the border */
+		border-bottom: none; /* Remove the bottom side of the border */
+	}
+
+	/* Bottom-right corner */
+	.hero .server-info::after {
+		bottom: 0;
+		right: 0;
+		border-top: none; /* Remove the top side of the border */
+		border-left: none; /* Remove the left side of the border */
+	}
+</style>

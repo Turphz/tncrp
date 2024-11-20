@@ -1,0 +1,159 @@
+---
+import Title from '../atoms/Title.astro';
+import './about.css';
+import Boton from '../atoms/Boton.astro';
+---
+
+<section id="about" class="hero">
+	<div class="hero__container">
+	
+		<img
+			class="about__img"
+			src="https://eclipse-rp.net/images/tonyhenge.png"
+			alt="Character Image"
+		/>
+
+		<div class="text__content">
+			<h1 class="about__title color__gradiente">HOW TO JOIN TNCRP</h1>
+			<p class="hero__text">
+				Follow these simple steps to start playing on TNCRP!
+			</p>
+
+			<div class="steps-container">
+				<!-- Step 1 -->
+				<div class="step-box">
+					<h2 class="step-title">Step 1</h2>
+					<p class="step-text">Buy GTA V</p>
+					<Boton href="https://store.steampowered.com/app/271590/Grand_Theft_Auto_V/" texto="Buy GTA V" />
+				</div>
+
+				<!-- Step 2 -->
+				<div class="step-box">
+					<h2 class="step-title">Step 2</h2>
+					<p class="step-text">Install FiveM</p>
+					<Boton href="https://fivem.net/" texto="Install FiveM" />
+				</div>
+
+				<!-- Step 3 -->
+				<div class="step-box">
+					<h2 class="step-title">Step 3</h2>
+					<p class="step-text">Join Server and Play!</p>
+					<Boton href="#" texto="Play" />
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero .hero__container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		left: -20rem;
+		text-align: center;
+		position: relative;
+		margin-top: -30rem;
+		gap: 0rem;
+	}
+
+	.hero .hero__img {
+		width: auto;
+		height: 350px;
+		object-fit: contain;
+		position: absolute;
+		bottom: 0;
+		right: 10%;
+		z-index: 1;
+	}
+
+	.hero .text__content {
+		z-index: 2;
+		margin-top: -60rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1.5rem;
+		padding: 1rem;
+		max-width: 800px;
+	}
+
+	.hero .about__title {
+		position: relative;
+		font-size: 3rem;
+		color: var(--primary-100);
+		left: -30rem;
+	}
+
+	.hero .hero__text {
+		font-size: 1.2rem;
+		color: var(--primary-90);
+		left: -30rem;
+	}
+
+	.steps-container {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		width: 100%;
+		align-items: center; /* Centers the steps */
+		
+	}
+
+	.step-box {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		background: rgba(255, 255, 255, 0.1);
+		padding: 1rem 2rem;
+		border-radius: 10px;
+		position: relative;
+		left: -30rem;
+		box-shadow: 0 0 10px rgba(128, 0, 128, 0.6);
+		width: 80%; /* Make all boxes the same width */
+		max-width: 400px; /* Prevent them from being too wide */
+		margin: auto;
+		text-align: center;
+		
+	}
+
+	.step-box::before,
+	.step-box::after {
+		content: '';
+		position: absolute;
+		width: 10%;
+		height: 30%;
+		background: transparent;
+		border: 2px solid rgba(128, 0, 128, 0.6);
+		border-radius: 3px;
+	}
+
+	/* Corner styles */
+	.step-box::before {
+		top: 0;
+		left: 0;
+		border-right: none;
+		border-bottom: none;
+	}
+
+	.step-box::after {
+		bottom: 0;
+		right: 0;
+		border-top: none;
+		border-left: none;
+	}
+
+	.step-title {
+		font-size: 1.8rem;
+		color: var(--primary-100);
+		margin-bottom: 0.5rem;
+		
+	}
+
+	.step-text {
+		font-size: 1.2rem;
+		color: var(--primary-90);
+		margin-bottom: 1rem;
+		
+	}
+</style>

@@ -1,0 +1,62 @@
+---
+import About from '../components/About/About.astro';
+import BlogHome from '../components/BlogHome.astro';
+import { mainMenu } from '../components/data/menuData';
+import Footer from '../components/Footer/Footer.astro';
+import Header from '../components/header/Header.astro';
+import Hero from '../components/hero/Hero.astro';
+import Portfolio from '../components/Portfolio.astro';
+import Skills from '../components/skills/Skills.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TNCRP - GTA V Roleplay Server</title>
+  <link rel="icon" href="/img/favicon.ico" type="image/x-icon"> <!-- Favicon -->
+</head>
+<body>
+  <Layout title="TNCRP - GTA V Roleplay Server">
+    <Header origin={mainMenu} />
+    <main class="self-center w-full">
+      <img src="/img/tncrplogo.png" alt="TNCRP Logo" class="background-image" />
+      <Hero />
+      <About />
+      <Skills />
+      <Portfolio />
+      <BlogHome />
+    </main>
+    <Footer />
+  </Layout>
+</body>
+<style>
+  .content-container {
+    position: relative; /* Create a stacking context */
+    width: 100%; /* Adjust to your layout */
+    height: 100vh; /* Full height of the viewport */
+    overflow: hidden; /* Ensure no scrolling issues with the image */
+}
+
+.background-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the image */
+    z-index: -1; /* Place the image behind other content */
+    opacity: 0.2; /* Adjust transparency for a background-like effect */
+    width: auto; /* Adjust as needed */
+    height: 80%; /* Adjust as needed */
+}
+
+.content {
+    position: relative; /* Ensure it's above the image */
+    z-index: 1; /* Bring content in front */
+    text-align: center; /* Center-align text */
+    color: white; /* Adjust text color for visibility */
+}
+
+</style>
+</html>
